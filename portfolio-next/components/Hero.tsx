@@ -14,7 +14,7 @@ function CollabTag({
 }) {
   return (
     <motion.div
-      className={`pointer-events-none absolute hidden items-center gap-1 sm:flex ${className}`}
+      className={`pointer-events-none absolute hidden items-center gap-1 md:flex ${className}`}
       animate={{ y: [0, -6, 0] }}
       transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
     >
@@ -31,16 +31,16 @@ function CollabTag({
 
 export function Hero() {
   return (
-    <section id="home" className="relative flex min-h-[100dvh] flex-col px-4 pb-28 pt-24 md:px-8">
+    <section id="home" className="relative flex min-h-[100dvh] flex-col px-4 pb-28 pt-[7.75rem] md:px-8 md:pt-24">
       <div className="relative mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center text-center">
-        <div className="relative mb-6 flex items-center justify-center gap-3 sm:gap-4">
+        <div className="relative mb-4 flex items-center justify-center gap-2.5 md:mb-6 md:gap-4">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={siteImages.portrait}
             alt={siteImages.portraitAlt}
-            className="h-28 w-28 rounded-full object-cover object-[center_12%] ring-2 ring-white/15 sm:h-32 sm:w-32"
+            className="h-[4.75rem] w-[4.75rem] rounded-full object-cover object-[center_12%] ring-2 ring-white/15 md:h-32 md:w-32"
           />
-          <span className="rounded-3xl bg-black px-4 py-2.5 text-base font-medium text-white shadow-lg sm:text-lg">
+          <span className="rounded-3xl bg-black px-3 py-2 text-sm font-medium text-white shadow-lg md:px-4 md:py-2.5 md:text-lg">
             Hello, I&apos;m Saif
           </span>
         </div>
@@ -62,7 +62,7 @@ export function Hero() {
             className="-left-24 bottom-[4%] lg:-left-32"
           />
 
-          <h1 className="relative z-[1] text-[clamp(2.6rem,10vw,6.4rem)] font-bold uppercase leading-[0.9] tracking-tight">
+          <h1 className="relative z-[1] text-[1.9rem] font-bold uppercase leading-[0.92] tracking-tight md:text-[clamp(2.6rem,10vw,6.4rem)] md:leading-[0.9]">
             <span className="block text-[var(--purple)]">Full-stack</span>
             <span className="block text-[var(--cream)]">Developer</span>
             <span className="relative block text-white">
@@ -91,7 +91,7 @@ export function Hero() {
           </p>
         </div>
 
-        <p className="mt-8 max-w-xl text-sm text-white/80 md:text-base">
+        <p className="mt-6 max-w-xl px-1 text-sm text-white/80 md:mt-8 md:text-base">
           I create digital products that balance{" "}
           <span className="text-[var(--purple)]">efficiency</span>,{" "}
           <span className="text-[var(--cream)]">aesthetics</span> and{" "}
@@ -99,13 +99,13 @@ export function Hero() {
         </p>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex items-end justify-between px-4 md:px-8">
-        <p className="hidden text-[11px] leading-tight text-white/35 sm:block">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-10 flex items-end justify-between px-4 md:bottom-6 md:px-8">
+        <p className="hidden text-[11px] leading-tight text-white/35 md:block">
           // Design, Code,
           <br />
           Ship
         </p>
-        <div className="pointer-events-auto pill mx-auto flex items-center gap-4 px-4 py-2.5 sm:mx-0">
+        <div className="pointer-events-auto pill mx-auto flex items-center gap-5 px-5 py-3 md:mx-0 md:gap-4 md:px-4 md:py-2.5">
           {contact.links.map((l) => (
             <a
               key={l.href}

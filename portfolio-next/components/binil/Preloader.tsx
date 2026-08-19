@@ -22,7 +22,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[400] flex items-end justify-between bg-[#070708] px-8 py-8"
+      className="fixed inset-0 z-[400] flex items-end justify-between bg-[#070708] px-5 py-[max(1.5rem,env(safe-area-inset-bottom))] md:px-8 md:py-8"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >

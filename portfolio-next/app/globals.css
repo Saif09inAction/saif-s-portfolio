@@ -48,3 +48,12 @@ html.lenis body {
   background: rgba(18, 18, 20, 0.72);
   backdrop-filter: blur(16px);
 }
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

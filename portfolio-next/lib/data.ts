@@ -33,6 +33,65 @@ export const hero = {
 
 export const projects: Project[] = [
   {
+    id: "dev-astrology",
+    type: "developer",
+    title: "Dheeraj Shastri Ji — Vedic Astrology",
+    hook: "Live client site for an astrologer — services, chatbot, and admin panel.",
+    description:
+      "Full marketing and booking website for Vedic astrologer Dheeraj Shastri Ji: visitors explore services, book consultations, and chat; the astrologer runs content and leads from an admin panel.",
+    date: "2026",
+    githubUrl: "",
+    siteUrl: "https://astrology-webapp-taupe.vercel.app/",
+    technologies: ["React", "Vite", "Chatbot", "Admin panel"],
+    thumbnail: "/images/projects/astrology.png",
+    detail: {
+      overview:
+        "Built a production site for astrologer Dheeraj Shastri Ji (Vedic astrology & spiritual healing). The public site is a dark, celestial service platform — trust stats, WhatsApp and call CTAs, service catalog (love, marriage, kundli, career), blog, testimonials, FAQ, and a consultation form. A chatbot handles first-touch chat; an admin panel lets the client manage the site without touching code.",
+      problem:
+        "The client needed more than a static brochure: a live presence that converts visitors into consultations, plus a way to update content and handle chats/leads from one place.",
+      solution:
+        "Shipped a React/Vite front end with service pages, lead capture, WhatsApp integration, an on-site chatbot for free first consultation, and an admin panel for day-to-day control.",
+      impact: "Live on Vercel — users browse and enquire; the astrologer runs operations from the admin panel.",
+      features: [
+        "Public site: home, about, services, blog, testimonials, FAQ, contact",
+        "Consultation / lead form and WhatsApp CTAs",
+        "Chatbot for first consultation",
+        "Admin panel for content and operations",
+      ],
+      myRole: "Full-stack developer — public site, chatbot, admin panel, and going live.",
+      techNotes: "React + Vite SPA, deployed on Vercel. Live: https://astrology-webapp-taupe.vercel.app/",
+    },
+  },
+  {
+    id: "dev-bliss-bombay",
+    type: "developer",
+    title: "Bliss Bombay",
+    hook: "Android ops app + live admin/supervisor studio for manufacturing.",
+    description:
+      "End-to-end system for Bliss Bombay manufacturing: an Android app for the floor and a secure admin & supervisor studio so staff run operations from the web. No public shop — the live link is the admin panel.",
+    date: "2026",
+    githubUrl: "",
+    siteUrl: "https://blissadmin.netlify.app",
+    technologies: ["Android", "Admin panel", "Full-stack"],
+    thumbnail: "/images/projects/bliss-bombay.png",
+    detail: {
+      overview:
+        "Bliss Bombay needed a full operations stack, not a marketing site. I built the Android app the team uses on the floor, plus a live admin & supervisor studio (mobile + password) for manufacturing control.",
+      problem:
+        "Manufacturing work lives on phones and on a supervisor desk — without a consumer website to point at.",
+      solution:
+        "Shipped a dedicated Android app for day-to-day use and a Netlify-hosted admin/supervisor studio so managers can sign in and run the system from the browser.",
+      impact: "Live admin studio at blissadmin.netlify.app; the Android app is the field surface.",
+      features: [
+        "Android app for operations (no public storefront)",
+        "Admin & supervisor studio with secure login",
+        "Built for Bliss Bombay manufacturing",
+      ],
+      myRole: "Full-stack developer — Android app, admin panel, and going live.",
+      techNotes: "Android client + web admin. Studio: https://blissadmin.netlify.app",
+    },
+  },
+  {
     id: "dev-1",
     type: "developer",
     title: "PrismHold",
@@ -219,7 +278,7 @@ export const about = {
 export const contact = {
   links: [
     { label: "GitHub", href: "https://github.com/Saif09inAction" },
-    { label: "LinkedIn", href: "https://www.linkedin.com/in/saif-salmani-38b63a30b/" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/saif-undefined-a525943a5" },
     { label: "Email", href: "mailto:saifsalmani224@gmail.com" },
   ],
 };
@@ -227,9 +286,119 @@ export const contact = {
 export const resumeUrl =
   "https://drive.google.com/uc?export=download&id=1hLZFlz9x_Os6IXZYqQ7-2h6wUpUgmsT0";
 
+export type JourneyStop = {
+  id: string;
+  year: string;
+  place: string;
+  title: string;
+  hook: string;
+  photos: string[];
+};
+
+export const journeyStops: JourneyStop[] = [
+  {
+    id: "mumbai-hacks-2024",
+    year: "2024",
+    place: "Mumbai",
+    title: "Mumbai Hacks 2024",
+    hook: "World-scale hackathon — first big stage, first all-nighter that counted.",
+    photos: ["/images/journey/mumbai-hacks-2024/1.jpg", "/images/journey/mumbai-hacks-2024/2.jpg"],
+  },
+  {
+    id: "piwot",
+    year: "2025",
+    place: "Jio Convention Centre",
+    title: "PIWOT",
+    hook: "Imagine Hackathon — demo-round energy in a packed convention hall.",
+    photos: ["/images/journey/piwot/1.jpg", "/images/journey/piwot/2.jpg"],
+  },
+  {
+    id: "mumbai-tech-week",
+    year: "2025",
+    place: "Mumbai",
+    title: "Mumbai Tech Week",
+    hook: "Builders, booths, and the city’s tech week in one sweep.",
+    photos: [
+      "/images/journey/mumbai-tech-week/1.jpg",
+      "/images/journey/mumbai-tech-week/2.jpg",
+      "/images/journey/mumbai-tech-week/3.jpg",
+    ],
+  },
+  {
+    id: "iot",
+    year: "2024–25",
+    place: "Labs & builds",
+    title: "IoT",
+    hook: "Hardware in the loop — sensors, boards, and prototypes between the events.",
+    photos: ["/images/journey/iot/1.jpg", "/images/journey/iot/2.png", "/images/journey/iot/3.jpg"],
+  },
+  {
+    id: "avalanche",
+    year: "2024",
+    place: "Mumbai",
+    title: "Avalanche Hackathon",
+    hook: "Web3 weekend — shipping under Avalanche’s Mumbai edition.",
+    photos: ["/images/journey/avalanche/1.jpg", "/images/journey/avalanche/2.jpg"],
+  },
+  {
+    id: "stellar",
+    year: "2024",
+    place: "Pune",
+    title: "Stellar Hackathon",
+    hook: "Pune sprint — new city, new teammates, same clock.",
+    photos: [
+      "/images/journey/stellar/1.jpg",
+      "/images/journey/stellar/2.jpg",
+      "/images/journey/stellar/3.jpg",
+      "/images/journey/stellar/4.jpg",
+    ],
+  },
+  {
+    id: "demo-day",
+    year: "2025",
+    place: "ITM Skills University",
+    title: "Demo Day",
+    hook: "Pitch, product, and a silver finish — FundFlow on stage.",
+    photos: ["/images/journey/demo-day/1.jpg", "/images/journey/demo-day/2.jpg"],
+  },
+  {
+    id: "mumbai-hacks-2025",
+    year: "2025",
+    place: "Mumbai",
+    title: "Mumbai Hacks 2025",
+    hook: "Back for a sharper run — story, build, and a tighter pitch.",
+    photos: [
+      "/images/journey/mumbai-hacks-2025/1.jpg",
+      "/images/journey/mumbai-hacks-2025/2.jpg",
+      "/images/journey/mumbai-hacks-2025/3.jpg",
+    ],
+  },
+  {
+    id: "mindsprint",
+    year: "2025",
+    place: "Hackathon",
+    title: "MindSprint",
+    hook: "Fast problem-solving — scope, build, present.",
+    photos: [
+      "/images/journey/mindsprint/1.jpg",
+      "/images/journey/mindsprint/2.jpg",
+      "/images/journey/mindsprint/3.jpg",
+      "/images/journey/mindsprint/4.jpg",
+    ],
+  },
+  {
+    id: "open-env",
+    year: "2025",
+    place: "Scaler, Bengaluru",
+    title: "Open Env",
+    hook: "Scaler University, Bengaluru — an open environment to build and meet.",
+    photos: ["/images/journey/open-env/1.jpg"],
+  },
+];
+
 export const navLinks = [
   { href: "#home", label: "Home" },
-  { href: "#work", label: "Case Studies" },
+  { href: "#journey", label: "Journey" },
   { href: "#projects", label: "My Projects" },
   { href: "#about", label: "About Me" },
 ];

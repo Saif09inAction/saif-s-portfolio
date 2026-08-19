@@ -29,15 +29,15 @@ const GROUPS = [
 
 export function SkillBands() {
   return (
-    <section className="relative z-10 border-t border-white/10 px-4 py-24 md:px-8">
+    <section className="relative z-10 border-t border-white/10 px-4 py-16 md:px-8 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <h2 className="text-3xl font-bold md:text-5xl">Experience & skills.</h2>
-        <div className="mt-12 space-y-10">
+        <h2 className="text-[2rem] font-bold leading-tight md:text-5xl">Experience & skills.</h2>
+        <div className="mt-10 space-y-8 md:mt-12 md:space-y-10">
           {GROUPS.map((g) => (
             <div key={g.n} className="grid gap-4 border-b border-white/10 pb-10 md:grid-cols-[80px_1fr]">
               <span className="text-sm text-white/35">{g.n}</span>
               <div>
-                <h3 className="text-2xl font-semibold">{g.title}</h3>
+                <h3 className="text-xl font-semibold md:text-2xl">{g.title}</h3>
                 <p className="mt-2 max-w-xl text-white/55">{g.body}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {g.tags.map((t) => (

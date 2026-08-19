@@ -1,7 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { AboutMe } from "@/components/binil/AboutMe";
-import { CaseStudies } from "@/components/binil/CaseStudies";
 import { ContactMe } from "@/components/binil/ContactMe";
+import { Journey } from "@/components/binil/Journey";
 import { ProjectBoard } from "@/components/binil/ProjectBoard";
 import { SkillBands } from "@/components/binil/SkillBands";
 
@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <AboutMe />
       <SkillBands />
-      <CaseStudies />
+      <Journey />
       <ProjectBoard />
       <ContactMe />
     </main>
