@@ -1,221 +1,129 @@
 "use client";
 
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-} from "framer-motion";
-import { useEffect, useMemo, useRef } from "react";
-import { hero, siteImages } from "@/lib/data";
-import { HeroBackground } from "./HeroBackground";
-import { HeroDevShowcase } from "./HeroDevShowcase";
-import { MagneticButton } from "./ui/MagneticButton";
+import { motion } from "framer-motion";
+import { contact, hero, siteImages } from "@/lib/data";
 
-function WordReveal({
-  text,
+function CollabTag({
+  color,
+  label,
   className,
-  delay = 0,
 }: {
-  text: string;
-  className?: string;
-  delay?: number;
+  color: string;
+  label: string;
+  className: string;
 }) {
-  const words = useMemo(() => text.split(/\s+/).filter(Boolean), [text]);
   return (
-    <span className={className}>
-      {words.map((word, i) => (
-        <motion.span
-          key={`${word}-${i}`}
-          initial={{ opacity: 0, y: 28, rotateX: -35 }}
-          animate={{ opacity: 1, y: 0, rotateX: 0 }}
-          transition={{
-            delay: delay + i * 0.045,
-            duration: 0.55,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="inline-block [transform-origin:center_bottom]"
-          style={{ marginRight: "0.28em" }}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </span>
+    <motion.div
+      className={`pointer-events-none absolute hidden items-center gap-1 sm:flex ${className}`}
+      animate={{ y: [0, -6, 0] }}
+      transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <span className="h-3 w-3 rotate-12 rounded-[2px]" style={{ background: color }} />
+      <span
+        className="rounded-md px-2 py-0.5 text-[11px] font-medium text-black"
+        style={{ background: color }}
+      >
+        {label}
+      </span>
+    </motion.div>
   );
 }
 
 export function Hero() {
-  const reduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
-  const portraitRef = useRef<HTMLDivElement>(null);
-  const rotateX = useSpring(useMotionValue(0), { stiffness: 100, damping: 22 });
-  const rotateY = useSpring(useMotionValue(0), { stiffness: 100, damping: 22 });
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const parallaxText = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 32]);
-  const parallaxImg = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : -22]);
-  const parallaxBg = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 56]);
-
-  useEffect(() => {
-    const el = portraitRef.current;
-    if (!el) return;
-    const rect = () => el.getBoundingClientRect();
-    const onMove = (e: MouseEvent) => {
-      const r = rect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      rotateY.set(px * 10);
-      rotateX.set(-py * 8);
-    };
-    const reset = () => {
-      rotateX.set(0);
-      rotateY.set(0);
-    };
-    el.addEventListener("mousemove", onMove);
-    el.addEventListener("mouseleave", reset);
-    return () => {
-      el.removeEventListener("mousemove", onMove);
-      el.removeEventListener("mouseleave", reset);
-    };
-  }, [rotateX, rotateY]);
-
-  const glowOpacity = useTransform(rotateX, [-8, 8], [0.45, 0.95]);
-
   return (
-    <section
-      ref={sectionRef}
-      id="home"
-      className="relative flex min-h-[100dvh] flex-col justify-center overflow-y-visible pt-24 pb-12 sm:pt-28 sm:pb-16"
-    >
-      <motion.div
-        className="pointer-events-none absolute inset-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
-        style={{ y: parallaxBg }}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(57,255,20,0.12),transparent),radial-gradient(ellipse_60%_40%_at_100%_50%,rgba(191,95,255,0.08),transparent),radial-gradient(ellipse_50%_40%_at_0%_80%,rgba(0,245,212,0.06),transparent)]" />
-        <HeroBackground />
-      </motion.div>
-      <HeroDevShowcase />
+    <section id="home" className="relative flex min-h-[100dvh] flex-col px-4 pb-28 pt-24 md:px-8">
+      <div className="relative mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center text-center">
+        <div className="relative mb-6 flex items-center justify-center gap-3 sm:gap-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={siteImages.portrait}
+            alt={siteImages.portraitAlt}
+            className="h-28 w-28 rounded-full object-cover object-[center_12%] ring-2 ring-white/15 sm:h-32 sm:w-32"
+          />
+          <span className="rounded-3xl bg-black px-4 py-2.5 text-base font-medium text-white shadow-lg sm:text-lg">
+            Hello, I&apos;m Saif
+          </span>
+        </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1280px] grid-cols-1 items-center gap-8 overflow-visible px-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.72fr)] lg:items-center lg:gap-8 lg:px-8 xl:gap-10">
-        <motion.div
-          className="order-1 min-w-0 text-center lg:py-6 lg:text-left"
-          style={{ perspective: "1400px", y: parallaxText }}
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45 }}
-            className="mb-4 flex flex-wrap items-center justify-center gap-2 lg:justify-start"
-          >
-            <span className="font-mono text-[11px] tracking-[0.2em] text-[#39ff14]/90 sm:text-xs">
-              {hero.eyebrow}
-            </span>
-            <span className="hidden h-1 w-1 rounded-full bg-zinc-600 sm:inline" aria-hidden />
-            <span className="text-[11px] text-zinc-500 sm:text-xs">{hero.location}</span>
-          </motion.div>
+        <div className="relative mt-4 w-fit">
+          <CollabTag
+            color="#f9a8d4"
+            label="Hackathon"
+            className="-left-28 top-[4%] lg:-left-36"
+          />
+          <CollabTag
+            color="#60a5fa"
+            label="Dev"
+            className="-right-20 top-[34%] lg:-right-28"
+          />
+          <CollabTag
+            color="#a78bfa"
+            label="saif"
+            className="-left-24 bottom-[4%] lg:-left-32"
+          />
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.12, duration: 0.4 }}
-            className="mb-6 flex flex-wrap justify-center gap-2 lg:justify-start"
-          >
-            {hero.badges.map((b, i) => (
-              <motion.span
-                key={b}
-                initial={{ opacity: 0, scale: 0.92 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 + i * 0.05, type: "spring", stiffness: 380, damping: 24 }}
-                whileHover={reduceMotion ? undefined : { y: -2, scale: 1.03 }}
-                className="rounded-full border border-[#39ff14]/25 bg-[#39ff14]/[0.07] px-3 py-1 text-[10px] font-medium uppercase tracking-wider text-zinc-200 shadow-[0_0_20px_rgba(57,255,20,0.08)] backdrop-blur-sm"
+          <h1 className="relative z-[1] text-[clamp(2.6rem,10vw,6.4rem)] font-bold uppercase leading-[0.9] tracking-tight">
+            <span className="block text-[var(--purple)]">Full-stack</span>
+            <span className="block text-[var(--cream)]">Developer</span>
+            <span className="relative block text-white">
+              Engineer
+              <a
+                href="#contact"
+                className="absolute left-[calc(100%+1.25rem)] top-1/2 hidden -translate-y-1/2 items-center gap-2 rounded-full border border-white/15 bg-black px-3 py-1.5 text-[11px] font-medium normal-case tracking-normal text-white md:inline-flex"
               >
-                {b}
-              </motion.span>
-            ))}
-          </motion.div>
-
-          <h1 className="font-semibold leading-[1.08] tracking-tight">
-            <span className="headline-glow block text-[clamp(1.65rem,4.5vw,3.15rem)] text-white">
-              {reduceMotion ? (
-                hero.headline
-              ) : (
-                <WordReveal text={hero.headline} delay={0.25} />
-              )}
+                <span className="h-2 w-2 rounded-full bg-[#39ff14]" />
+                Let&apos;s Connect
+              </a>
             </span>
-            <motion.span
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: reduceMotion ? 0 : 0.95, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-4 block bg-gradient-to-r from-[#00f5d4] via-[#39ff14] to-[#bf5fff] bg-clip-text text-2xl text-transparent sm:text-3xl md:text-4xl"
-            >
-              {hero.role}
-            </motion.span>
+            <span className="block">
+              <span className="text-white">&amp; </span>
+              <span className="text-[var(--teal)]">Builder</span>
+            </span>
           </h1>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.15, duration: 0.5 }}
-            className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start"
-          >
-            <MagneticButton
-              href="#developer"
-              className="rounded-full bg-gradient-to-r from-[#39ff14]/25 to-[#00f5d4]/20 px-8 py-3 text-sm font-semibold text-white ring-1 ring-[#39ff14]/40 transition hover:glow-green"
-            >
-              View work
-            </MagneticButton>
-            <MagneticButton
-              href="#contact"
-              className="rounded-full glass-panel px-8 py-3 text-sm font-semibold text-zinc-200 transition hover:bg-white/10"
-            >
-              Contact
-            </MagneticButton>
-          </motion.div>
-        </motion.div>
+          <p className="absolute left-[calc(100%+2.5rem)] top-1 hidden w-max text-left text-[11px] leading-snug text-white/40 lg:block">
+            <span className="block whitespace-nowrap">// Based in</span>
+            <span className="block whitespace-nowrap">Mumbai, India</span>
+          </p>
+          <p className="absolute right-[calc(100%+2.5rem)] top-[48%] hidden w-max text-right text-[11px] leading-snug text-white/50 lg:block">
+            <span className="block whitespace-nowrap">// Ship with</span>
+            <span className="block whitespace-nowrap">Purpose &amp; Impact</span>
+          </p>
+        </div>
 
-        <motion.div
-          ref={portraitRef}
-          className="relative order-2 flex min-h-[min(48vh,440px)] w-full items-end justify-center lg:min-h-[min(80vh,720px)] lg:justify-end lg:pl-2 lg:pr-0
-            lg:-mr-[max(1rem,calc((100vw-1280px)/2+2rem))] lg:w-[calc(100%+max(0rem,calc((100vw-1280px)/2+2rem)))]"
-          style={{
-            y: parallaxImg,
-            transformStyle: "preserve-3d",
-            perspective: 1200,
-          }}
+        <p className="mt-8 max-w-xl text-sm text-white/80 md:text-base">
+          I create digital products that balance{" "}
+          <span className="text-[var(--purple)]">efficiency</span>,{" "}
+          <span className="text-[var(--cream)]">aesthetics</span> and{" "}
+          <span className="text-[var(--teal)]">functionality</span>.
+        </p>
+      </div>
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex items-end justify-between px-4 md:px-8">
+        <p className="hidden text-[11px] leading-tight text-white/35 sm:block">
+          // Design, Code,
+          <br />
+          Ship
+        </p>
+        <div className="pointer-events-auto pill mx-auto flex items-center gap-4 px-4 py-2.5 sm:mx-0">
+          {contact.links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              target={l.href.startsWith("mailto") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              className="text-xs text-white/70 hover:text-white"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+        <a
+          href="mailto:saifsalmani224@gmail.com"
+          className="pointer-events-auto pill hidden px-4 py-2 text-xs text-white/80 md:inline-flex"
         >
-          <motion.div
-            style={{ opacity: glowOpacity }}
-            className="pointer-events-none absolute bottom-[8%] left-[8%] right-0 top-[18%] rounded-[40%] bg-gradient-to-br from-[#39ff14]/22 via-[#bf5fff]/18 to-[#00f5d4]/12 blur-3xl"
-          />
-          <motion.div
-            className="relative ml-auto w-full max-w-[min(100%,440px)] sm:max-w-[480px] lg:mr-0 lg:max-w-[min(640px,calc(52vw+max(0px,calc((100vw-1280px)/2))))] xl:max-w-[min(700px,calc(54vw+max(0px,calc((100vw-1280px)/2))))]"
-            initial={{ scale: reduceMotion ? 1 : 0.94 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.35, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            style={{
-              rotateX,
-              rotateY,
-              transformStyle: "preserve-3d",
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={siteImages.heroPortrait}
-              alt={siteImages.heroAlt}
-              className="avatar-float h-auto w-full object-contain object-right-bottom drop-shadow-[0_0_56px_rgba(57,255,20,0.18)]"
-              width={900}
-              height={1200}
-              fetchPriority="high"
-            />
-          </motion.div>
-        </motion.div>
+          saifsalmani224@gmail.com
+        </a>
       </div>
     </section>
   );

@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Syne } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import { ClientShell } from "@/components/ClientShell";
 import "./globals.css";
 
-const syne = Syne({
-  variable: "--font-syne",
+const grotesk = Space_Grotesk({
+  variable: "--font-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "Saif Salmani | Developer & Video Editor",
+  title: "Saif Salmani | Full-stack Developer",
   description:
-    "Full-stack developer and video editor based in Mumbai — portfolio, projects, and contact.",
+    "Mumbai-based full-stack developer. React, Next.js, Node — products from hackathons to production.",
   metadataBase: new URL("https://saifsalmani.me"),
 };
 
@@ -28,8 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${jetbrains.variable} h-full scroll-smooth`}>
-      <body className="min-h-full text-zinc-100 antialiased">
+    <html lang="en" className={`${grotesk.variable} h-full`}>
+      <body className="min-h-full antialiased">
         <ClientShell>{children}</ClientShell>
       </body>
     </html>

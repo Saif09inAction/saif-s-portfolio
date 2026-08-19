@@ -1,41 +1,19 @@
-import dynamic from "next/dynamic";
 import { Hero } from "@/components/Hero";
-
-const SectionDeveloper = dynamic(() =>
-  import("@/components/SectionDeveloper").then((m) => ({ default: m.SectionDeveloper }))
-);
-const SectionEditor = dynamic(() =>
-  import("@/components/SectionEditor").then((m) => ({ default: m.SectionEditor }))
-);
-const IdeasSection = dynamic(() =>
-  import("@/components/IdeasSection").then((m) => ({ default: m.IdeasSection }))
-);
-const AboutSection = dynamic(() =>
-  import("@/components/AboutSection").then((m) => ({ default: m.AboutSection }))
-);
-const SkillsSection = dynamic(() =>
-  import("@/components/SkillsSection").then((m) => ({ default: m.SkillsSection }))
-);
-const TimelineSection = dynamic(() =>
-  import("@/components/TimelineSection").then((m) => ({ default: m.TimelineSection }))
-);
-const ContactSection = dynamic(() =>
-  import("@/components/ContactSection").then((m) => ({ default: m.ContactSection }))
-);
-const Footer = dynamic(() => import("@/components/Footer").then((m) => ({ default: m.Footer })));
+import { AboutMe } from "@/components/binil/AboutMe";
+import { CaseStudies } from "@/components/binil/CaseStudies";
+import { ContactMe } from "@/components/binil/ContactMe";
+import { ProjectBoard } from "@/components/binil/ProjectBoard";
+import { SkillBands } from "@/components/binil/SkillBands";
 
 export default function Home() {
   return (
-    <main>
+    <main className="relative z-10">
       <Hero />
-      <SectionDeveloper />
-      <SectionEditor />
-      <IdeasSection />
-      <AboutSection />
-      <SkillsSection />
-      <TimelineSection />
-      <ContactSection />
-      <Footer />
+      <AboutMe />
+      <SkillBands />
+      <CaseStudies />
+      <ProjectBoard />
+      <ContactMe />
     </main>
   );
 }
