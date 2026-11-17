@@ -9,6 +9,8 @@ const appRoot = path.dirname(fileURLToPath(import.meta.url));
 const nextConfig: NextConfig = {
   /* Static HTML export — reliable on Netlify (and works on Vercel) without the Functions runtime */
   output: "export",
+  /* So /resume serves resume/index.html (avoids clash with the resume/ RSC payload folder). */
+  trailingSlash: true,
   images: { unoptimized: true },
   turbopack: {
     root: appRoot,

@@ -30,7 +30,7 @@ export function ContactMe() {
               {l.label}
             </a>
           ))}
-          <a href="/resume" className="pill min-h-11 px-5 py-2.5 text-sm">
+          <a href="/resume/" className="pill min-h-11 px-5 py-2.5 text-sm">
             Resume
           </a>
         </div>
