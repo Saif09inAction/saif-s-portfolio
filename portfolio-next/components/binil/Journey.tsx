@@ -86,8 +86,6 @@ function EventGallery({ stop }: { stop: JourneyStop }) {
 }
 
 export function Journey() {
-  const [open, setOpen] = useState(false);
-
   return (
     <section id="journey" className="relative z-10 border-t border-white/10 px-4 py-16 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
@@ -98,91 +96,46 @@ export function Journey() {
             Ten rooms between Mumbai and Bengaluru — hackathons, IoT benches, and a Demo Day stage.
             The résumé lists the names. This is what it actually looked like.
           </p>
-
-          <AnimatePresence initial={false}>
-            {!open ? (
-              <motion.div
-                key="cta"
-                className="mt-10 flex flex-col items-center"
-                initial={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -16, scale: 0.96 }}
-                transition={{ duration: 0.35 }}
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpen(true)}
-                  className="group relative inline-flex w-full max-w-sm items-center justify-center gap-2 rounded-full border border-[var(--teal)]/40 bg-[var(--teal)]/10 px-5 py-3.5 text-sm font-medium text-white shadow-[0_0_40px_rgba(45,212,191,0.18)] md:w-auto md:gap-3 md:px-8 md:py-4 md:text-base md:hover:border-[var(--teal)] md:hover:bg-[var(--teal)]/20 md:hover:shadow-[0_0_56px_rgba(45,212,191,0.32)]"
-                >
-                  <span className="absolute -inset-1 -z-10 animate-pulse rounded-full bg-[var(--teal)]/15 blur-md" />
-                  <span className="h-2 w-2 rounded-full bg-[var(--teal)] shadow-[0_0_12px_var(--teal)]" />
-                  Peek behind the résumé
-                  <span className="text-[var(--teal)] transition group-hover:translate-x-0.5">→</span>
-                </button>
-                <p className="mt-4 text-xs text-white/35">One click. Photos from the floors — not the LinkedIn recap.</p>
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
         </div>
 
-        <AnimatePresence>
-          {open ? (
-            <motion.ol
-              key="roadmap"
-              initial="hidden"
-              animate="show"
-              className="relative mt-12 space-y-14 pl-8 md:mt-20 md:space-y-24 md:pl-0"
-              variants={{
-                hidden: {},
-                show: { transition: { staggerChildren: 0.14, delayChildren: 0.12 } },
-              }}
-            >
-              <motion.span
-                aria-hidden
-                className="absolute left-[11px] top-3 h-[calc(100%-1.5rem)] w-px origin-top bg-gradient-to-b from-[var(--purple)] via-white/15 to-[var(--teal)] md:left-1/2 md:-translate-x-px"
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ duration: 1.15, ease: [0.22, 1, 0.36, 1] }}
-              />
+        <ol className="relative mt-12 space-y-14 pl-8 md:mt-20 md:space-y-24 md:pl-0">
+          <span
+            aria-hidden
+            className="absolute left-[11px] top-3 h-[calc(100%-1.5rem)] w-px bg-gradient-to-b from-[var(--purple)] via-white/15 to-[var(--teal)] md:left-1/2 md:-translate-x-px"
+          />
 
-              {journeyStops.map((stop, index) => {
-                const photoLeft = index % 2 === 1;
-                return (
-                  <motion.li
-                    key={stop.id}
-                    className="relative grid items-center gap-5 md:grid-cols-2 md:gap-16"
-                    variants={{
-                      hidden: { opacity: 0, y: 56, filter: "blur(8px)" },
-                      show: {
-                        opacity: 1,
-                        y: 0,
-                        filter: "blur(0px)",
-                        transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
-                      },
-                    }}
-                  >
-                    <span
-                      aria-hidden
-                      className="absolute left-[-21px] top-2 z-10 h-3 w-3 rounded-full bg-[var(--cream)] shadow-[0_0_16px_var(--cream)] md:left-1/2 md:-translate-x-1/2"
-                    />
+          {journeyStops.map((stop, index) => {
+            const photoLeft = index % 2 === 1;
+            return (
+              <motion.li
+                key={stop.id}
+                className="relative grid items-center gap-5 md:grid-cols-2 md:gap-16"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span
+                  aria-hidden
+                  className="absolute left-[-21px] top-2 z-10 h-3 w-3 rounded-full bg-[var(--cream)] shadow-[0_0_16px_var(--cream)] md:left-1/2 md:-translate-x-1/2"
+                />
 
-                    <div className={photoLeft ? "md:order-1" : "md:order-2"}>
-                      <EventGallery stop={stop} />
-                    </div>
+                <div className={photoLeft ? "md:order-1" : "md:order-2"}>
+                  <EventGallery stop={stop} />
+                </div>
 
-                    <div className={photoLeft ? "md:order-2 md:text-left" : "md:order-1 md:text-right"}>
-                      <p className="text-xs uppercase tracking-[0.2em] text-white/35">
-                        {String(index + 1).padStart(2, "0")} · {stop.year}
-                      </p>
-                      <h3 className="mt-2 text-xl font-semibold md:text-3xl">{stop.title}</h3>
-                      <p className="mt-1 text-sm text-[var(--teal)]">{stop.place}</p>
-                      <p className="mt-4 text-sm leading-relaxed text-white/55">{stop.hook}</p>
-                    </div>
-                  </motion.li>
-                );
-              })}
-            </motion.ol>
-          ) : null}
-        </AnimatePresence>
+                <div className={photoLeft ? "md:order-2 md:text-left" : "md:order-1 md:text-right"}>
+                  <p className="text-xs uppercase tracking-[0.2em] text-white/35">
+                    {String(index + 1).padStart(2, "0")} · {stop.year}
+                  </p>
+                  <h3 className="mt-2 text-xl font-semibold md:text-3xl">{stop.title}</h3>
+                  <p className="mt-1 text-sm text-[var(--teal)]">{stop.place}</p>
+                  <p className="mt-4 text-sm leading-relaxed text-white/55">{stop.hook}</p>
+                </div>
+              </motion.li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

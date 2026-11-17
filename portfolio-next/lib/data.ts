@@ -283,8 +283,7 @@ export const contact = {
   ],
 };
 
-export const resumeUrl =
-  "https://drive.google.com/uc?export=download&id=1hLZFlz9x_Os6IXZYqQ7-2h6wUpUgmsT0";
+export const resumeUrl = "/Saif_Salmani_resume.pdf";
 
 export type JourneyStop = {
   id: string;
@@ -378,7 +377,7 @@ export const journeyStops: JourneyStop[] = [
     year: "2025",
     place: "Hackathon",
     title: "MindSprint",
-    hook: "Fast problem-solving — scope, build, present.",
+    hook: "2nd runner-up — fast problem-solving, scope, build, present.",
     photos: [
       "/images/journey/mindsprint/1.jpg",
       "/images/journey/mindsprint/2.jpg",

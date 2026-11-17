@@ -1,6 +1,6 @@
 "use client";
 
-import { contact, resumeUrl } from "@/lib/data";
+import { contact } from "@/lib/data";
 
 export function ContactMe() {
   return (
@@ -30,7 +30,7 @@ export function ContactMe() {
               {l.label}
             </a>
           ))}
-          <a href={resumeUrl} target="_blank" rel="noopener noreferrer" className="pill min-h-11 px-5 py-2.5 text-sm">
+          <a href="/resume" className="pill min-h-11 px-5 py-2.5 text-sm">
             Resume
           </a>
         </div>
